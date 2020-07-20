@@ -22,9 +22,11 @@ public class OtusTest {
 
     @Test
     public void openPage() {
+        String title = "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям";
+
         driver.get("https://otus.ru/");
         logger.info("Открыта страница отус");
-        assertTrue(driver.getTitle().contains("Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям"));
+        assertTrue(driver.getTitle().contains(title));
     }
 
     @After
