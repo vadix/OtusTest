@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,12 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import config.ServerConfig;
 
 import static org.junit.Assert.assertTrue;
 
 public class OtusTest {
     protected static WebDriver driver;
     private final Logger logger = LogManager.getLogger(OtusTest.class);
+    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
     @Before
     public void setup() {
@@ -24,7 +27,7 @@ public class OtusTest {
     public void openPage() {
         String title = "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям";
 
-        driver.get("https://otus.ru/");
+        driver.get(cfg.url());
         logger.info("Открыта страница отус");
         assertTrue(driver.getTitle().contains(title));
     }
