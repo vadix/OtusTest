@@ -1,10 +1,8 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import config.ServerConfig;
@@ -18,9 +16,14 @@ public class OtusTest {
 
     @Before
     public void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        logger.info("Драйвер поднят");
+        String browserParam = System.getProperty("browser");
+        if (browserParam == null) {
+            browserParam = "chrome";
+        }
+        WebDriverFactory.DriverType driverType =  WebDriverFactory.DriverType.valueOf(browserParam.toUpperCase());
+
+        driver = WebDriverFactory.create(driverType);
+        logger.info("Driver ready");
     }
 
     @Test
@@ -28,7 +31,7 @@ public class OtusTest {
         String title = "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям";
 
         driver.get(cfg.url());
-        logger.info("Открыта страница отус");
+        logger.info("Otus page is opened");
         assertTrue(driver.getTitle().contains(title));
     }
 
