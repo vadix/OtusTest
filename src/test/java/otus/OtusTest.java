@@ -1,26 +1,26 @@
+package otus;
+
 import org.aeonbits.owner.ConfigFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import config.ServerConfig;
+import otus.config.ServerConfig;
 
 import static org.junit.Assert.assertTrue;
 
 public class OtusTest {
-    protected static WebDriver driver;
     private final Logger logger = LogManager.getLogger(OtusTest.class);
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    private final ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    private WebDriver driver;
 
     @Before
     public void setup() {
-        String browserParam = System.getProperty("browser");
-        if (browserParam == null) {
-            browserParam = "chrome";
-        }
-        WebDriverFactory.DriverType driverType =  WebDriverFactory.DriverType.valueOf(browserParam.toUpperCase());
+
+        String browserParam = cfg.browser();
+        WebDriverFactory.DriverType driverType = WebDriverFactory.DriverType.valueOf(browserParam.toUpperCase());
 
         driver = WebDriverFactory.create(driverType);
         logger.info("Driver ready");
@@ -40,6 +40,5 @@ public class OtusTest {
         if (driver != null) {
             driver.quit();
         }
-
-}
+    }
 }

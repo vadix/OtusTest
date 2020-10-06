@@ -1,3 +1,5 @@
+package otus;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +12,10 @@ public class WebDriverFactory {
 
     public enum DriverType {
         CHROME,
-        FIREFOX
+        FIREFOX,
+        SAFARI,
+        IE,
+        EDGE
     }
     public static WebDriver create(DriverType type) {
         switch (type) {
@@ -24,8 +29,7 @@ public class WebDriverFactory {
 
                 return new FirefoxDriver();
             default:
-                throw new RuntimeException("Unsupported driver");
+                throw new UnsupportedDriverException(type);
         }
-
     }
 }
