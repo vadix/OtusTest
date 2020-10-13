@@ -50,7 +50,7 @@
     <properties>
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.0.0</webdrivermanager.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <log4j-api.version>2.13.3</log4j-api.version>
         <log4j-core.verison>2.13.3</log4j-core.verison>
         <owner.verison>1.0.12</owner.verison>
